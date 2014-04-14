@@ -1,4 +1,7 @@
 libgdx-sample
 =============
 
-Sample libgdx project to get familiar with libgdx integration with Chilitags, camera etc.
+This is a sample libgdx project to get familiar with libgdx integration with Chilitags, camera etc.
+
+Platforms
+---------
