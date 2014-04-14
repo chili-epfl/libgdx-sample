@@ -24,3 +24,6 @@ local.properties
 
 #OpenCV libraries
 libopencv*.so
+
+#Markdown cache
+*.md.html
