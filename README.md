@@ -140,8 +140,10 @@ To run the project:
 
 - For desktop, run as `Java Application` and select `Main.java` in the
 `ch.epfl.chili.libgdx_sample.desktop` package. **Important note:** The
-`LD_LIBRARY_PATH` must be set inside `/etc/environment` since Eclipse will not
-be aware of it when it's exported inside `.bashrc`. 
+`LD_LIBRARY_PATH` must be set inside Eclipse since Eclipse will not
+be aware of it when it's exported inside `.bashrc`. An alternative is to set
+`-Djava.library.path=...` inside the Java Application run configuration's
+VM args.
 - For Android, run as `Android Application`.
 - For web, configure an external `Program` via `External Tools Configuration`.
 Set `Location` to the `gradlew` in your project root. Set the `Working
