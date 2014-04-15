@@ -8,6 +8,10 @@ import ch.epfl.chili.libgdx_sample.PlatformDependentMethods;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
+/**
+ * The entry point object that runs the application on Android
+ * @author Ayberk Özgür
+ */
 public class MainActivity extends AndroidApplication {
 	
     @Override
@@ -25,9 +29,5 @@ public class MainActivity extends AndroidApplication {
         initialize(new LibgdxSample(platformDeps, cameraControl), cfg);
         
         graphics.getView().setKeepScreenOn(true);
-    }
-    
-    public void post(Runnable r){
-    	handler.post(r);
     }
 }

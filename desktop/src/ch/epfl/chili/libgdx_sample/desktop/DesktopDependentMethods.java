@@ -2,6 +2,10 @@ package ch.epfl.chili.libgdx_sample.desktop;
 
 import ch.epfl.chili.libgdx_sample.PlatformDependentMethods;
 
+/**
+ * Container for desktop dependent simple methods
+ * @author Ayberk Özgür
+ */
 public class DesktopDependentMethods implements PlatformDependentMethods {
 	
 	@Override

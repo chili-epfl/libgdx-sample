@@ -7,6 +7,10 @@ import ch.epfl.chili.libgdx_sample.PlatformDependentMethods;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
+/**
+ * The entry point object that runs the application on desktop
+ * @author Ayberk Özgür
+ */
 public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();

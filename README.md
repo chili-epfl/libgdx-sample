@@ -6,7 +6,7 @@ Chilitags, camera etc. It should display a growing and swaying funky palm tree
 on each detected tag. 
 
 The build system uses Gradle extensively, which can be thought of a CMake 
-counterpart for Java. 
+counterpart for Java that also downloads and maintains missing packages.
 
 Below are the official libgdx documentation for Gradle:
 
@@ -18,6 +18,11 @@ https://github.com/libgdx/libgdx/wiki/Dependency-management-with-Gradle)
 https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline)
 - [IDE setup for Gradle](
 https://github.com/libgdx/libgdx/wiki/Setting-up-your-Development-Environment-%28Eclipse%2C-Intellij-IDEA%2C-NetBeans%29)
+
+The following GUI is used to create new libgdx projects: 
+[http://libgdx.badlogicgames.com/nightlies/dist/gdx-setup.jar](
+http://libgdx.badlogicgames.com/nightlies/dist/gdx-setup.jar)
+It sets up the initial project structure as described in the following section.
 
 Project structure
 -----------------
@@ -89,8 +94,7 @@ and install Chilitags/OpenCV inside the Android specific portion of the
 project. That guide will work you through installing the Android SDK and NDK. 
 In this case, the `ANDROID_PROJECT_ROOT` variable inside the guide would be 
 `<libgdx-sample-path>/android`. 
-
-3. It is necessary at this point to install Chilitags inside the Android project
+It is necessary at this point to install Chilitags inside the Android project
 even if you are only going to run the desktop version, since the JNI wrappers
 inside the Android project are also referenced by the desktop project. In the
 near future, this is going to be replaced by proper libraries that will be
@@ -142,7 +146,7 @@ To run the project:
 `ch.epfl.chili.libgdx_sample.desktop` package. **Important note:** The
 `LD_LIBRARY_PATH` must be set inside Eclipse since Eclipse will not
 be aware of it when it's exported inside `.bashrc`. An alternative is to set
-`-Djava.library.path=...` inside the Java Application run configuration's
+`-Djava.library.path=...` inside the `Java Application` run configuration's
 VM args.
 - For Android, run as `Android Application`.
 - For web, configure an external `Program` via `External Tools Configuration`.

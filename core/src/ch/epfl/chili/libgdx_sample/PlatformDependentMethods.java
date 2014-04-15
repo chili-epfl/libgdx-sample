@@ -1,5 +1,9 @@
 package ch.epfl.chili.libgdx_sample;
 
+/**
+ * A platform independent base for all the simple and short platform dependent methods (camera interface is not one of them)
+ * @author Ayberk Özgür
+ */
 public interface PlatformDependentMethods {
 	
 	/**

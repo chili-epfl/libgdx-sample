@@ -3,8 +3,7 @@ package ch.epfl.chili.libgdx_sample;
 import ch.epfl.chili.libgdx_sample.util.Size2D;
 
 /**
- * The base interface to describe device camera access in a platform independent manner.
- * 
+ * The base interface to describe device camera access in a platform independent manner
  * @author Ayberk Özgür
  */
 public interface DeviceCameraController {

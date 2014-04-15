@@ -8,9 +8,14 @@ import ch.epfl.chili.libgdx_sample.PlatformDependentMethods;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ * Container for Android dependent simple methods
+ * @author Ayberk Özgür
+ */
 public class AndroidDependentMethods implements PlatformDependentMethods {
 
 	private Context context;
+	private Scanner scanner;
 	
 	/**
 	 * Creates a new Android dependents method holder.
@@ -26,8 +31,8 @@ public class AndroidDependentMethods implements PlatformDependentMethods {
 		//Get the tag_configuration.yml file bundled with our apk and write it to a location accessible by the native code
 		try {
 			
-			//Get the file's bytes and write them over
-			Scanner configScanner = new Scanner(context.getAssets().open("tag_configuration.yml")).useDelimiter("\\A");
+			scanner = new Scanner(context.getAssets().open("tag_configuration.yml"));
+			Scanner configScanner = scanner.useDelimiter("\\A");
 			byte[] configBytes = (configScanner.hasNext() ? configScanner.next() : "").getBytes();
 			configScanner.close();
 			FileOutputStream newConfigFile = context.openFileOutput("tag_configuration.yml", Context.MODE_PRIVATE);
@@ -47,7 +52,7 @@ public class AndroidDependentMethods implements PlatformDependentMethods {
 
 	@Override
 	public String Chilitags_getCalibrationFilename() {
-		// TODO ÜSTTEKİYLE AYNI ŞEYİ YAP
+		//TODO DO THE SAME THING AS WITH GETCONFIGFILENAME
 		return null;
 	}
 	

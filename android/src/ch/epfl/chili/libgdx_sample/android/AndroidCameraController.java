@@ -19,6 +19,10 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 
+/**
+ * The object to interface the Android camera
+ * @author Ayberk Özgür
+ */
 public class AndroidCameraController implements DeviceCameraController, Camera.PreviewCallback {
 
 	private long lastMillis = 0;
@@ -35,10 +39,10 @@ public class AndroidCameraController implements DeviceCameraController, Camera.P
 	private ByteBuffer yBuffer;
 	private ByteBuffer uvBuffer;
 
-	ShaderProgram shader; //Our shader
-	Texture yTexture; //Our Y texture
-	Texture uvTexture; //Our UV texture
-	Mesh mesh; //Our mesh that we will draw the texture on
+	ShaderProgram shader; //Our shader that will convert from YUV to RGB
+	Texture yTexture; //Texture to hold our camera image's Y plane
+	Texture uvTexture; //Texture to hold our camera image's UV plane
+	Mesh mesh; //Our mesh that we will draw the textures on
 
 	@Override
 	public void init(){
@@ -179,11 +183,12 @@ public class AndroidCameraController implements DeviceCameraController, Camera.P
 	@Override
 	public void onPreviewFrame(byte[] data, Camera camera) {
 
+		//Calculate FPS
 		long currentMillis = System.currentTimeMillis();
 		try{
-			double fps_now = 1000/(currentMillis - lastMillis);
-			fps = 0.8*fps + 0.2*fps_now;
-		}catch(Exception e){}
+			double fpsNow = 1000/(currentMillis - lastMillis);
+			fps = 0.8*fps + 0.2*fpsNow;
+		}catch(Exception e){} //Guard against divide by zero
 		lastMillis = currentMillis;
 
 		//Send the buffer reference to the next preview so that a new buffer is not allocated and we use the same space
