@@ -139,12 +139,15 @@ http://dist.springsource.com/release/TOOLS/gradle).
 To run the project:
 
 - For desktop, run as `Java Application` and select `Main.java` in the
-`ch.epfl.chili.libgdx_sample.desktop` package.
+`ch.epfl.chili.libgdx_sample.desktop` package. **Important note:** The
+`LD_LIBRARY_PATH` must be set inside `/etc/environment` since Eclipse will not
+be aware of it when it's exported inside `.bashrc`. 
 - For Android, run as `Android Application`.
 - For web, configure an external `Program` via `External Tools Configuration`.
 Set `Location` to the `gradlew` in your project root. Set the `Working
 Directory` to your project root. Set the Argument to `html:superDev`. Now you
 can use this external tool to launch the project in superDev mode just like
-the command line. 
+the command line. Again, this will work after we have proper javascript 
+bindings for Chilitags.
 
 For other IDEs, please see the official libgdx documentation. 
