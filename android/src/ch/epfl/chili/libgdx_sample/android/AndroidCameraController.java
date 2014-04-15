@@ -6,9 +6,6 @@ import java.util.List;
 
 import ch.epfl.chili.libgdx_sample.DeviceCameraController;
 import ch.epfl.chili.libgdx_sample.util.Size2D;
-import ch.epfl.chili.chilitags.Chilitags3D;
-import ch.epfl.chili.chilitags.Chilitags3D.InputType;
-import ch.epfl.chili.chilitags.ObjectTransform;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -287,12 +284,18 @@ public class AndroidCameraController implements DeviceCameraController, Camera.P
 	}
 
 	@Override
-	public InputType getImageFormat() {
-		return InputType.YUV_NV21;
+	public ImageFormat getImageFormat() {
+		return ImageFormat.YUV_NV21;
 	}
 
 	@Override
-	public ObjectTransform[] getTags(Chilitags3D chilitags) {
-		return chilitags.estimate(image);
+	public void lockImage() {}
+
+	@Override
+	public byte[] getImage() {
+		return image;
 	}
+
+	@Override
+	public void unlockImage() {}
 }

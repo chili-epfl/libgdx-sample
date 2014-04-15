@@ -98,7 +98,10 @@ public class LibgdxSample implements ApplicationListener {
 		Size2D processingSize = deviceCameraControl.getProcessingSize();
 		
 		//Create the actual Chilitags object
-		chilitags = new Chilitags3D(cameraSize.width,cameraSize.height,processingSize.width,processingSize.height,deviceCameraControl.getImageFormat());
+		chilitags = new Chilitags3D(
+				cameraSize.width,cameraSize.height,
+				processingSize.width,processingSize.height,
+				Chilitags3D.InputType.values()[deviceCameraControl.getImageFormat().ordinal()]);
 		//chilitags.readTagConfiguration(platformDeps.Chilitags_getTagConfigFilename(), false);
 		platformDeps.print(cameraSize.width+" "+cameraSize.height+" "+processingSize.width+" "+processingSize.height);
 		double[] cc = {
@@ -140,7 +143,7 @@ public class LibgdxSample implements ApplicationListener {
 		
 		deviceCameraControl.renderBackground();
 		
-		ObjectTransform[] results = deviceCameraControl.getTags(chilitags); //TODO: GET THIS IN ANOTHER THREAD
+		ObjectTransform[] results = chilitags.estimate(deviceCameraControl.getImage()); //TODO: GET THIS IN ANOTHER THREAD
 		
 		if(!loading){
 			

@@ -7,8 +7,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import ch.epfl.chili.libgdx_sample.DeviceCameraController;
 import ch.epfl.chili.libgdx_sample.util.Size2D;
-import ch.epfl.chili.chilitags.Chilitags3D;
-import ch.epfl.chili.chilitags.ObjectTransform;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -29,9 +27,8 @@ public class DesktopCameraController implements DeviceCameraController {
 	private final int height = 480;
 	
 	private static byte[] image = null; //The image buffer that will hold the camera image when preview callback arrives
-	private ReentrantLock lock_image = new ReentrantLock();
-	private static ByteBuffer imageBuffer;
-	private ReentrantLock lock_imageBuffer = new ReentrantLock();
+	private ReentrantLock imageLock = new ReentrantLock();
+	private static ByteBuffer imageByteBuffer;
 	
 	private boolean running = false;
 	
@@ -44,7 +41,7 @@ public class DesktopCameraController implements DeviceCameraController {
 		background = new Texture(width,height,Format.RGB888);
 		
 		image = new byte[width*height*3];
-		imageBuffer = ByteBuffer.allocateDirect(width*height*3);
+		imageByteBuffer = ByteBuffer.allocateDirect(width*height*3);
 
 		camera = Webcam.getDefault();
 		camera.setViewSize(new Dimension(width,height));
@@ -63,22 +60,21 @@ public class DesktopCameraController implements DeviceCameraController {
 	private void webcamRunner(){
 		while(running){
 			
+			//Calculate the FPS
 			long currentMillis = System.currentTimeMillis();
 			try{
-				double fps_now = 1000/(currentMillis - lastMillis);
-				fps = 0.8*fps + 0.2*fps_now;
-			}catch(Exception e){}
+				double fpsNow = 1000/(currentMillis - lastMillis);
+				fps = 0.8*fps + 0.2*fpsNow;
+			}catch(Exception e){} //Guard against divide by zero
 			lastMillis = currentMillis;
 			
-			//lock_imageBuffer.lock();
-			imageBuffer.position(0);
-			imageBuffer.put(((DataBufferByte)camera.getImage().getRaster().getDataBuffer()).getData());
-			imageBuffer.position(0);
-			lock_image.lock();
-			imageBuffer.get(image);
-			lock_image.unlock();
-			imageBuffer.position(0);
-			//lock_imageBuffer.unlock();
+			//Get the image inside our byte array
+			imageByteBuffer.position(0);
+			imageByteBuffer.put(((DataBufferByte)camera.getImage().getRaster().getDataBuffer()).getData());
+			imageByteBuffer.position(0);
+			lockImage();
+			imageByteBuffer.get(image);
+			unlockImage();
 		}
 	}
 
@@ -93,11 +89,9 @@ public class DesktopCameraController implements DeviceCameraController {
 		Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
 		background.bind();
 
-		//lock_imageBuffer.lock();
 		//Y texture is (width*height) in size and each pixel is one byte; by setting GL_LUMINANCE, OpenGL puts this byte into R,G and B components of the texture
-		imageBuffer.position(0);
-		Gdx.gl.glTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, width, height, 0, GL20.GL_RGB, GL20.GL_UNSIGNED_BYTE, imageBuffer);
-		//lock_imageBuffer.unlock();
+		imageByteBuffer.position(0);
+		Gdx.gl.glTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, width, height, 0, GL20.GL_RGB, GL20.GL_UNSIGNED_BYTE, imageByteBuffer);
 		
 		//Use linear interpolation when magnifying/minifying the texture to areas larger/smaller than the texture size
 		Gdx.gl.glTexParameterf(GL20.GL_TEXTURE_2D, GL20.GL_TEXTURE_MIN_FILTER, GL20.GL_LINEAR);
@@ -125,16 +119,22 @@ public class DesktopCameraController implements DeviceCameraController {
 	}
 
 	@Override
-	public Chilitags3D.InputType getImageFormat() {
-		return Chilitags3D.InputType.RGB888;
+	public ImageFormat getImageFormat() {
+		return ImageFormat.RGB888;
 	}
 
 	@Override
-	public ObjectTransform[] getTags(Chilitags3D chilitags) {
-		ObjectTransform[] tags;
-		lock_image.lock();
-		tags = chilitags.estimate(image);
-		lock_image.unlock();
-		return tags;
+	public byte[] getImage(){
+		return image;
+	}
+
+	@Override
+	public void lockImage() {
+		imageLock.lock();
+	}
+
+	@Override
+	public void unlockImage() {
+		imageLock.unlock();
 	}
 }
