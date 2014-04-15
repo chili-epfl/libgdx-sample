@@ -4,7 +4,12 @@ import ch.epfl.chili.libgdx_sample.util.Size2D;
 import ch.epfl.chili.chilitags.Chilitags3D;
 import ch.epfl.chili.chilitags.ObjectTransform;
 
-public interface PlatformDependentCameraController {
+/**
+ * The base interface to describe device camera access in a platform independent manner.
+ * 
+ * @author Ayberk Özgür
+ */
+public interface DeviceCameraController {
 	
 	void init();
 	

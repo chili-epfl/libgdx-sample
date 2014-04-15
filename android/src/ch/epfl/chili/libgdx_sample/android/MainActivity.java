@@ -2,7 +2,7 @@ package ch.epfl.chili.libgdx_sample.android;
 
 import android.os.Bundle;
 import ch.epfl.chili.libgdx_sample.LibgdxSample;
-import ch.epfl.chili.libgdx_sample.PlatformDependentCameraController;
+import ch.epfl.chili.libgdx_sample.DeviceCameraController;
 import ch.epfl.chili.libgdx_sample.PlatformDependentMethods;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -21,7 +21,7 @@ public class MainActivity extends AndroidApplication {
         cfg.r = 8;
         
         PlatformDependentMethods platformDeps = new AndroidDependentMethods(getApplicationContext());
-        PlatformDependentCameraController cameraControl = new AndroidDependentCameraController();
+        DeviceCameraController cameraControl = new AndroidCameraController();
         initialize(new LibgdxSample(platformDeps, cameraControl), cfg);
         
         graphics.getView().setKeepScreenOn(true);

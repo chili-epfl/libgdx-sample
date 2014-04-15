@@ -5,7 +5,7 @@ import java.awt.image.DataBufferByte;
 import java.nio.ByteBuffer;
 import java.util.concurrent.locks.ReentrantLock;
 
-import ch.epfl.chili.libgdx_sample.PlatformDependentCameraController;
+import ch.epfl.chili.libgdx_sample.DeviceCameraController;
 import ch.epfl.chili.libgdx_sample.util.Size2D;
 import ch.epfl.chili.chilitags.Chilitags3D;
 import ch.epfl.chili.chilitags.ObjectTransform;
@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.sarxos.webcam.Webcam;
 
-public class DesktopDependentCameraController implements PlatformDependentCameraController {
+public class DesktopCameraController implements DeviceCameraController {
 
 	private long lastMillis = 0;
 	private double fps = 0.0;

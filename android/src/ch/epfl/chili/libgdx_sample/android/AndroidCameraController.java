@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.List;
 
-import ch.epfl.chili.libgdx_sample.PlatformDependentCameraController;
+import ch.epfl.chili.libgdx_sample.DeviceCameraController;
 import ch.epfl.chili.libgdx_sample.util.Size2D;
 import ch.epfl.chili.chilitags.Chilitags3D;
 import ch.epfl.chili.chilitags.Chilitags3D.InputType;
@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 
-public class AndroidDependentCameraController implements PlatformDependentCameraController, Camera.PreviewCallback {
+public class AndroidCameraController implements DeviceCameraController, Camera.PreviewCallback {
 
 	private long lastMillis = 0;
 	private double fps = 0.0;

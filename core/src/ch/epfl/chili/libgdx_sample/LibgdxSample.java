@@ -32,7 +32,7 @@ public class LibgdxSample implements ApplicationListener {
 	private double fps = 0;
 
 	private final PlatformDependentMethods platformDeps;
-	private final PlatformDependentCameraController deviceCameraControl;
+	private final DeviceCameraController deviceCameraControl;
 
 	public Environment environment;
 	public PerspectiveCamera camera;
@@ -45,7 +45,7 @@ public class LibgdxSample implements ApplicationListener {
 	public SpriteBatch spriteBatch;
 	public boolean loading;
 	
-	public LibgdxSample(PlatformDependentMethods platformDependentMethods, PlatformDependentCameraController cameraControl) {
+	public LibgdxSample(PlatformDependentMethods platformDependentMethods, DeviceCameraController cameraControl) {
 		this.platformDeps = platformDependentMethods;
 		this.deviceCameraControl = cameraControl;
 	}

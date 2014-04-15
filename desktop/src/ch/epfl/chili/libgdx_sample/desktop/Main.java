@@ -1,7 +1,7 @@
 package ch.epfl.chili.libgdx_sample.desktop;
 
 import ch.epfl.chili.libgdx_sample.LibgdxSample;
-import ch.epfl.chili.libgdx_sample.PlatformDependentCameraController;
+import ch.epfl.chili.libgdx_sample.DeviceCameraController;
 import ch.epfl.chili.libgdx_sample.PlatformDependentMethods;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -14,7 +14,7 @@ public class Main {
 		cfg.width = 640;
 		cfg.height = 480;
 
-		PlatformDependentCameraController camController = new DesktopDependentCameraController();
+		DeviceCameraController camController = new DesktopCameraController();
 		PlatformDependentMethods platformDeps = new DesktopDependentMethods();
 
 		new LwjglApplication(new LibgdxSample(platformDeps,camController), cfg);
